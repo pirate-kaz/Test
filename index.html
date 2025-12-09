@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Webze — Crypto Leverage</title>
+
+<!-- Google fonts (you can swap) -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg: #0b0b0b;
+    --card: #0f0f10;
+    --muted: #9a9a9a;
+    --accent: #f6c85a; /* yellow-ish accent */
+    --white: #ffffff;
+    --radius: 999px;
+    --maxw: 980px;
+  }
+
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    background: linear-gradient(180deg,var(--bg) 0%, #070707 60%);
+    color:var(--white);
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    line-height:1.25;
+    display:flex;
+    justify-content:center;
+    padding:24px;
+  }
+
+  .wrap{
+    width:100%;
+    max-width:420px; /* mobile-first look like your screenshots */
+    margin: 8px;
+  }
+
+  /* top nav / badge */
+  .topbar{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:18px;
+  }
+  .envato{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    background: rgba(255,255,255,0.04);
+    border-radius:12px;
+    padding:8px 12px;
+    width:100%;
+  }
+  .envato img{height:18px; width:auto; opacity:0.95}
+  .buybtn{
+    background:#6bbf51;
+    color:#06210a;
+    padding:8px 12px;
+    border-radius:10px;
+    font-weight:600;
+    font-size:14px;
+  }
+
+  /* Brand pill */
+  .brand-pill{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    padding:12px 14px;
+    border-radius:999px;
+    gap:12px;
+    margin-bottom:18px;
+  }
+  .brand-left{display:flex;align-items:center;gap:12px}
+  .brand-bubble{
+    width:36px;height:36px;border-radius:50%;
+    background: radial-gradient(circle at 30% 25%, rgba(255,255,255,0.06), rgba(0,0,0,0.6));
+    box-shadow: inset -6px -6px 12px rgba(0,0,0,0.7), 6px 6px 20px rgba(0,0,0,0.6);
+    display:flex;align-items:center;justify-content:center;font-weight:700;
+  }
+  .brand-name{font-weight:800;font-size:20px;letter-spacing:-0.5px}
+  .brand-dot{color:var(--accent); margin-left:2px}
+
+  /* built on web3 badge */
+  .badge{
+    display:inline-block;
+    border-radius:24px;
+    padding:8px 14px;
+    border:1px solid rgba(246,200,90,0.12);
+    color:var(--accent);
+    font-weight:700;
+    font-size:12px;
+    margin-bottom:18px;
+    background: linear-gradient(180deg, rgba(246,200,90,0.03), transparent);
+    width:fit-content;
+  }
+
+  /* hero */
+  .hero{
+    margin-bottom:24px;
+  }
+  .headline{
+    font-size:40px;
+    font-weight:800;
+    margin:6px 0 10px;
+    letter-spacing:-1px;
+  }
+  .headline .muted{
+    color: rgba(255,255,255,0.18);
+    font-weight:800;
+    margin-right:6px;
+  }
+  .sub{
+    color:var(--muted);
+    font-size:15px;
+    margin-bottom:18px;
+  }
+
+  /* email capture */
+  .form-row{
+    display:flex;
+    gap:12px;
+    align-items:center;
+    margin-bottom:24px;
+  }
+  .input{
+    flex:1;
+    background: rgba(255,255,255,0.02);
+    border:1px solid rgba(255,255,255,0.03);
+    padding:14px 16px;
+    border-radius:30px;
+    color:var(--white);
+    font-size:14px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .input svg{opacity:0.9}
+  input[type="email"]{
+    background:transparent;
+    border:0;
+    outline:0;
+    color:var(--white);
+    width:100%;
+    font-size:14px;
+  }
+  .cta{
+    background: linear-gradient(180deg,var(--accent), #ebb84b);
+    color:#111;
+    padding:14px 18px;
+    border-radius:30px;
+    font-weight:800;
+    border:0;
+    min-width:130px;
+    box-shadow: 0 6px 18px rgba(246,200,90,0.12);
+  }
+
+  .hint{color:var(--muted); font-size:13px; text-align:center; margin-bottom:28px}
+
+  /* decorative 3D-ish shapes row */
+  .decor{
+    display:flex;
+    justify-content:space-around;
+    gap:12px;
+    margin: 12px 0 36px;
+  }
+  .shape{
+    width:64px;height:64px;border-radius:12px;
+    background: radial-gradient(circle at 35% 30%, rgba(255,255,255,0.03), rgba(0,0,0,0.6));
+    box-shadow: inset -6px -6px 20px rgba(0,0,0,0.6), 8px 10px 22px rgba(0,0,0,0.5);
+    opacity:0.95;
+    display:flex;align-items:center;justify-content:center;
+  }
+
+  /* social icons */
+  .socials{
+    display:flex;
+    gap:14px;
+    justify-content:center;
+    margin-bottom:28px;
+  }
+  .circle{
+    width:54px;height:54px;border-radius:50%;
+    border:1px solid rgba(255,255,255,0.04);
+    display:flex;align-items:center;justify-content:center;
+    background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.35));
+    font-weight:700;
+    opacity:0.96;
+  }
+
+  /* footer */
+  footer{
+    color:var(--muted);
+    font-size:13px;
+    text-align:center;
+    margin-top:20px;
+    padding-top:10px;
+    border-top:1px solid rgba(255,255,255,0.02);
+  }
+
+  /* floating up arrow */
+  .up{
+    position:fixed;
+    right:18px;
+    bottom:18px;
+    width:46px;height:46px;border-radius:50%;
+    background:var(--accent);
+    color:#111;
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 8px 20px rgba(0,0,0,0.45);
+    cursor:pointer;
+    font-weight:800;
+  }
+
+  /* big desktop tweaks */
+  @media(min-width:880px){
+    .wrap{max-width:900px;padding:28px}
+    .hero{display:flex;gap:36px;align-items:center}
+    .headline{font-size:64px}
+  }
+
+  /* simple focus styles */
+  input:focus{outline:2px solid rgba(246,200,90,0.12); border-color: rgba(246,200,90,0.12)}
+  button:active{transform:translateY(1px)}
+</style>
+</head>
+<body>
+  <div class="wrap" role="main">
+    <header>
+      <div class="topbar">
+        <div class="envato" aria-hidden="true">
+          <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='56' height='18'><rect width='56' height='18' fill='%231C1C1C'/></svg>" alt="">
+          <div style="flex:1;font-size:13px;color:var(--muted)">envato market</div>
+        </div>
+        <div class="buybtn" role="button" aria-label="Buy now">Buy now</div>
+      </div>
+
+      <div class="brand-pill" aria-label="Webze brand">
+        <div class="brand-left">
+          <div class="brand-bubble" aria-hidden="true">W</div>
+          <div class="brand-name">Webze<span class="brand-dot">.</span></div>
+        </div>
+        <div style="opacity:0.95; font-weight:700; color:rgba(255,255,255,0.85)">☰</div>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div style="flex:1">
+        <div class="badge">BUILT ON WEB3. POWERED BY YOU</div>
+
+        <h1 class="headline"><span class="muted">The</span> future of<br> <strong>leverage is here</strong></h1>
+
+        <p class="sub">Leverage on any tokens with a protocol trusted with billions for its performance and reliability.</p>
+
+        <div class="form-row" role="form" aria-label="Early access signup">
+          <label class="input">
+            <!-- small envelope icon -->
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M3 6.75A2.75 2.75 0 0 1 5.75 4h12.5A2.75 2.75 0 0 1 21 6.75v10.5A2.75 2.75 0 0 1 18.25 20H5.75A2.75 2.75 0 0 1 3 17.25V6.75z" stroke="rgba(255,255,255,0.14)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M21 6.75l-9 6.75L3 6.75" stroke="rgba(255,255,255,0.08)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <input id="email" name="email" type="email" placeholder="Business email" aria-label="Business email" />
+          </label>
+
+          <button class="cta" id="ctaBtn">GET EARLY ACCESS</button>
+        </div>
+
+        <div class="hint">Start monitoring for free or <a href="#" style="color:var(--accent); font-weight:700; text-decoration:none">msg us!</a></div>
+      </div>
+    </section>
+
+    <div class="decor" aria-hidden="true">
+      <div class="shape"></div>
+      <div class="shape" style="border-radius:50%; width:72px; height:72px"></div>
+      <div class="shape"></div>
+    </div>
+
+    <section>
+      <h2 style="text-align:center; font-weight:800; font-size:34px; margin:6px 0 18px;">Join with our <span style="color: rgba(255,255,255,0.18); font-weight:900">future</span> of Webzo<br> currency</h2>
+
+      <div class="socials" role="navigation" aria-label="Social links">
+        <a href="#" class="circle" title="Facebook" aria-label="Facebook">
+          <!-- facebook-ish icon -->
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 3h3v3h-3v3h-3V6h-2v-3h2V2.5C13 1.7 13.7 1 14.5 1h0C15.3 1 16 1.7 16 2.5V3z" fill="rgba(255,255,255,0.9)"/></svg>
+        </a>
+        <a href="#" class="circle" title="X" aria-label="X">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 3l18 18M21 3L3 21" stroke="rgba(255,255,255,0.9)" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </a>
+        <a href="#" class="circle" title="Telegram" aria-label="Telegram">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12l16-7-7 16-3-6-6-3z" fill="rgba(255,255,255,0.9)"/></svg>
+        </a>
+        <a href="#" class="circle" title="Discord" aria-label="Discord">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 8a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm10 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z" fill="rgba(255,255,255,0.95)"/></svg>
+        </a>
+      </div>
+
+    </section>
+
+    <footer>
+      <div>Copyright &amp; design by <span style="color:var(--accent);font-weight:700">@ThemeAdapt</span></div>
+    </footer>
+  </div>
+
+  <div class="up" id="toTop" title="Back to top" aria-hidden="false">↑</div>
+
+<script>
+  // simple interactions
+  const btn = document.getElementById('ctaBtn');
+  const emailInput = document.getElementById('email');
+
+  btn.addEventListener('click', (e) => {
+    const email = emailInput.value.trim();
+    if (!email || !/.+@.+\..+/.test(email)) {
+      // quick client-side validation
+      emailInput.focus();
+      emailInput.setAttribute('placeholder','Enter a valid email');
+      return;
+    }
+
+    // Example: show a tiny success state. Replace with real API call.
+    btn.textContent = 'THANKS — WE WILL EMAIL';
+    btn.disabled = true;
+    setTimeout(()=>{ btn.textContent = 'GET EARLY ACCESS'; btn.disabled = false; emailInput.value=''; }, 2500);
+  });
+
+  document.getElementById('toTop').addEventListener('click', ()=> window.scrollTo({top:0, behavior:'smooth'}));
+</script>
+</body>
+</html>
